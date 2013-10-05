@@ -1,0 +1,7 @@
+h1 Users
+a(href="/users/new") New User
+
+if users
+  ul
+  for user in users
+    li(href="/users/#{user.id}") #{user.name}

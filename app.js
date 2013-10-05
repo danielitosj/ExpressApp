@@ -9,6 +9,10 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
+var mongoose = require('mongoose');
+
+mongoose.conect('mongodb://localhost/tucjs');
+
 var app = express();
 
 // all environments

@@ -3,16 +3,21 @@
  * GET users listing.
  */
 
-var users = [];
+var mongoose = require('mongoose');
+var User = require('../models/user');
 
 exports.get = function(req, res){
-  if(req.params.id) {
-    // detail
-    res.render('detail', {user: users[req.params.id]});
-  } else {
-    // list
-    res.render('list', {users: users});
-  }
+  User.find(req.params.id, function (error, res) {
+    if (error) {
+      throw error;
+    } else {
+      if (!res.length) {
+        res.render('detail', { user: res});  
+      } else {
+        res.render('list', {users: res})
+      }
+    }
+  });
 };
 
 exports.form = function (req, res) {
@@ -25,7 +30,8 @@ exports.post = function (req, res) {
     users[req.body.id] = req.body;
   } else {
     // insert
-    users.push(req.body);
+    //users.push(req.body);
+    User.save({name: req.body.name, email: req.body.email})
   }
   res.redirect('/users/'+(users.length-1));
 }

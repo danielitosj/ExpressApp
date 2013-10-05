@@ -1,4 +1,7 @@
-form(action="/users/new", method="POST")
-  input(name="name", type="text", placeholder="Username")
-  input(name="email", type="email", placeholder="Email")
-  button(type="submit") Add
+extends layout
+
+block content
+  form(action="/users/new", method="POST")
+    input(name="name", type="text", placeholder="Username")
+    input(name="email", type="email", placeholder="Email")
+    button(type="submit") Add

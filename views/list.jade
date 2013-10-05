@@ -1,7 +1,10 @@
-h1 Users
-a(href="/users/new") New User
+extends layout
 
-if users
-  ul
-  for user in users
-    li(href="/users/#{user.id}") #{user.name}
+block content
+  h1 Users
+  a(href="/users/new") New User
+
+  if users
+    ul
+    for user in users
+      li(href="/users/#{user.id}") #{user.name}

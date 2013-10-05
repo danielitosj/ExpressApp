@@ -1,5 +1,8 @@
-if user
-  h2 #{user.name}
-  h4 #{user.email}
-else
-  h2 No user with that id.
+extends layout
+
+block content
+  if user
+    h2 #{user.name}
+    h4 #{user.email}
+  else
+    h2 No user with that id.

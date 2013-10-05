@@ -27,5 +27,5 @@ exports.post = function (req, res) {
     // insert
     users.push(req.body);
   }
-  res.redirect('/users/'+users.length);
+  res.redirect('/users/'+(users.length-1));
 }

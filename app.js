@@ -11,7 +11,8 @@ var path = require('path');
 
 var mongoose = require('mongoose');
 
-mongoose.conect('mongodb://localhost/tucjs');
+// Conectamos con la DB
+mongoose.connect('mongodb://localhost/tucjs');
 
 var app = express();
 

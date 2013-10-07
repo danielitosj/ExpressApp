@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "3.4.0",
     "sequelize": "*",
-    "jade": "*"
+    "jade": "*",
+    "mongoose": "~3.6.20"
   }
 }

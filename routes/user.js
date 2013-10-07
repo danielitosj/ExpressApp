@@ -2,22 +2,32 @@
 /*
  * GET users listing.
  */
-
-var mongoose = require('mongoose');
 var User = require('../models/user');
 
 exports.get = function(req, res){
-  User.find(req.params.id, function (error, res) {
-    if (error) {
-      throw error;
-    } else {
-      if (!res.length) {
-        res.render('detail', { user: res});  
+  if (req.params.id) {
+    User.findById(req.params.id, function (error, user) {
+      if (error) {
+        throw error;
       } else {
-        res.render('list', {users: res})
+          res.render('detail', { user: user });
       }
-    }
-  });
+    });
+  } else {
+    User
+      .find()
+      /* .exec() es otra forma de utilizar
+       * los callbacks luego de una query
+       * http://mongoosejs.com/docs/api.html#query_Query-exec
+       */
+      .exec(function (error, users) {
+        if (error) {
+          throw error;
+        } else {
+          res.render('list', { users: users });
+        }
+      });
+  }
 };
 
 exports.form = function (req, res) {
@@ -31,7 +41,11 @@ exports.post = function (req, res) {
   } else {
     // insert
     //users.push(req.body);
-    User.save({name: req.body.name, email: req.body.email})
+    var user = new User();
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.save();
   }
-  res.redirect('/users/'+(users.length-1));
-}
+
+  res.redirect('/users/' + user.id);
+};
